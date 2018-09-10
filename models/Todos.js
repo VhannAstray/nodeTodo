@@ -12,7 +12,7 @@ var Todo = {
      */
     getTodoById(id, callback) {
         return db.query(
-           "SELECT id, title FROM todos WHERE id=?",
+           "SELECT id, title, begin, end FROM todos WHERE id=?",
            [id],
            callback
         );
@@ -23,7 +23,7 @@ var Todo = {
      * Exécute une requête pour récupérer la totalité des todos
      */
     getAllTodos: function(callback) {
-        return db.query("SELECT * FROM todos", callback);
+        return db.query("SELECT * FROM todos ORDER BY begin DESC", callback);
     },
 
     /**
@@ -43,8 +43,8 @@ var Todo = {
     addTodo: function(Todo, callback) {
         console.log('Add ' + JSON.stringify(Todo));
         return db.query(
-            "INSERT INTO todos (title) VALUES (?);",
-            [Todo.title, Todo.debut, Todo.fin],
+            "INSERT INTO todos (title, begin, end) VALUES (?,?,?);",
+            [Todo.title, Todo.begin, Todo.end],
             callback
         );
     },
@@ -57,8 +57,8 @@ var Todo = {
      */
     updateTodo(id, Todo, callback) {
         return db.query(
-            "UPDATE todos SET title=? WHERE id=?;",
-            [Todo.title, id],
+            "UPDATE todos SET title=?,begin=?,end=? WHERE id=?;",
+            [Todo.title, Todo.begin, Todo.end, id],
             callback
         )
     },

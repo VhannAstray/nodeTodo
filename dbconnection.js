@@ -15,7 +15,8 @@ var connexion = mysql.createPool ({
     host: '127.0.0.1',
     user: 'todos_dba',
     password: 'admin',
-    database: 'todos_repo'
+    database: 'todos_repo',
+	port: 3307
 });
 
 module.exports = connexion;
