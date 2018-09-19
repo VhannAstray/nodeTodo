@@ -23,7 +23,7 @@ var Todo = {
      * Exécute une requête pour récupérer la totalité des todos
      */
     getAllTodos: function(callback) {
-        return db.query("SELECT * FROM todos ORDER BY begin DESC", callback);
+        return db.query("SELECT * FROM todos ORDER BY begin", callback);
     },
 
     /**
